@@ -32,7 +32,12 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { getLoginCode, login } from '../../api/login'
+import { getLoginCode, login, getMenuList } from '../../api/login'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+const store = useStore()
+const router = useRouter()
 
 const loginForm = reactive({
   username: 'test',
@@ -55,25 +60,33 @@ async function getCode() {
   const res = await getLoginCode()
   data.codeUrl = res.data.data.captchaImg
   data.token = res.data.data.token
-  console.log(data.codeurlx)
 }
 getCode()
 
 // 登录
 const loginFormRef = ref()
-async function handelLogin() {
-  console.log(loginFormRef)
-  const res = await login({
-    username: loginForm.username,
-    password: loginForm.password,
-    code: loginForm.code,
-    token: data.token
+function handelLogin() {
+  if (!loginFormRef.value) return
+  loginFormRef.value.validate(async (valid) => {
+    if (valid) {
+      const res = await login({
+        username: loginForm.username,
+        password: loginForm.password,
+        code: loginForm.code,
+        token: data.token
+      })
+      if (res.data.code === 200) {
+        store.commit('user/setHeaders', res.headers.authorization)
+        getMenuList().then((response) => {
+          store.commit('user/setMenuList', response.data.data.nav)
+          router.push('/')
+        })
+      } else {
+        console.log(res)
+        getCode()
+      }
+    }
   })
-  if (res.data.code === 200) {
-    alert(111)
-  } else {
-    getCode()
-  }
 }
 </script>
 
