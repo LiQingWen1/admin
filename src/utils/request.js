@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { loding } from './loding'
 import store from '../store'
-import { ElMessage } from 'element-plus'
 
 const http = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -32,11 +31,6 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (res) => {
     loding.close()
-    if (res.data.code === 200) {
-      _showMessage(res.data.msg, 'success')
-    } else if (res.data.code === 400) {
-      _showMessage(res.data.msg, 'error')
-    }
     return res
   },
   (err) => {
@@ -45,13 +39,13 @@ http.interceptors.response.use(
   }
 )
 
-function _showMessage(msg, type) {
-  ElMessage({
-    showClose: true,
-    message: msg,
-    type: type
-  })
-}
+// function _showMessage(msg, type) {
+//   ElMessage({
+//     showClose: true,
+//     message: msg,
+//     type: type
+//   })
+// }
 
 /*
 get,post,都可以使用data传参
