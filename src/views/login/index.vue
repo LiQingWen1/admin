@@ -24,7 +24,10 @@
           />
           <img :src="data.codeUrl" @click="getCode" />
         </el-form-item>
-        <el-button type="primary" @click="handelLogin">提交</el-button>
+        <div class="button">
+          <el-button type="primary" @click="handelLogin">提交</el-button>
+          <el-button type="info">获取验证码</el-button>
+        </div>
       </el-form>
     </div>
   </div>
@@ -94,7 +97,11 @@ function handelLogin() {
 <style lang="scss" scoped>
 .login {
   background: #fafafa;
-  height: 100%;
+  height: 450px;
+  width: 450px;
+  margin: auto;
+  margin-top: 100px;
+  border: 1px solid #cccccc;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -105,6 +112,14 @@ function handelLogin() {
       width: 120px;
       height: 100%;
       margin-left: 10px;
+    }
+    .button {
+      width: 175px;
+      height: 30px;
+      // margin-top: 50px;
+      // margin-right: 50px;
+      margin: 0 auto;
+      // border: #cccccc 1px solid;
     }
   }
 }
