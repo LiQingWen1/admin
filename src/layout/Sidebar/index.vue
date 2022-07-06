@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar">
-    <menu-tree  :menu="menuList"></menu-tree>
+    <!-- <h1 class="sidebar-title">首页</h1> -->
+    <menu-tree :menu="menuList"></menu-tree>
   </div>
 </template>
 
@@ -44,4 +45,11 @@ const menuList = reactive([
 .sidebar {
   height: 100%;
 }
+// .sidebar-title{
+//   text-align : center;
+//   padding : 15px 0;
+//   font-size : 22px;
+//   color : #fff;
+//   background: #545c64;
+// }
 </style>

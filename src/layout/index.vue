@@ -1,5 +1,8 @@
 <template>
-  <el-row>
+  <el-row class="aside-container">
+    <!-- <el-col :span="4">
+      <span>首页</span>
+    </el-row> -->
     <el-col :span="3">
       <sidebar></sidebar>
     </el-col>
@@ -16,4 +19,8 @@ import Navbar from './Navbar'
 import AppMain from './AppMain'
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.aside-container {
+  height: 100%;
+}
+</style>
